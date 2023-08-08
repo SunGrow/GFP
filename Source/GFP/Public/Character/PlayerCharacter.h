@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "GFPCharacter.h"
 #include "InputActionValue.h"
 #include "PlayerCharacter.generated.h"
@@ -49,4 +50,7 @@ public:
 	
 	UPROPERTY(BlueprintReadOnly, Transient)
 	FVector LastInputVector;
+	
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly)
+	FGameplayTag MovementAllowedGameplayTag;
 };

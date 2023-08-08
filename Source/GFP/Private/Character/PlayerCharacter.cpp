@@ -17,6 +17,7 @@ APlayerCharacter::APlayerCharacter()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	MovementAllowedGameplayTag = FGameplayTag::RequestGameplayTag(FName("Movement.MovementAllowed"));
 }
 
 // Called when the game starts or when spawned
@@ -71,7 +72,7 @@ void APlayerCharacter::Move(const FInputActionValue& Value)
 	
 	if (Controller != nullptr)
 	{
-		if (AbilitySystemComponent->HasMatchingGameplayTag(FGameplayTag::RequestGameplayTag(FName("StatusEffect.MovementDisabled"))))
+		if (!AbilitySystemComponent->HasMatchingGameplayTag(MovementAllowedGameplayTag))
 		{
 			return;
 		}
@@ -85,6 +86,7 @@ void APlayerCharacter::Move(const FInputActionValue& Value)
 		// get right vector 
 		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 		InputVector = ForwardDirection * MovementVector.Y + RightDirection * MovementVector.X;
+		InputVector.Normalize();
 		// add movement 
 		AddMovementInput(InputVector, 1.f);
 	}
@@ -93,6 +95,6 @@ void APlayerCharacter::Move(const FInputActionValue& Value)
 void APlayerCharacter::Look(const FInputActionValue& InputActionValue)
 {
 	const auto Vector = InputActionValue.Get<FVector>();
-	APawn::AddControllerYawInput(Vector.Y);
-	APawn::AddControllerPitchInput(Vector.X);
+	APawn::AddControllerYawInput(Vector.X);
+	APawn::AddControllerPitchInput(-Vector.Y);
 }
