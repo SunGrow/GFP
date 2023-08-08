@@ -16,9 +16,12 @@ UCLASS()
 class GFP_API AGFPPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+	AGFPPlayerController();
+
 public:
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
-	TObjectPtr<UInputMappingContext> BaseMappingContext = nullptr;
-	UPROPERTY(EditDefaultsOnly, Category = "Input")
-	TObjectPtr<UGameplayInputAsset> BaseInput = nullptr;
+	TObjectPtr<UGameplayInputAsset> BaseMappingContext = nullptr;
+	
+	TObjectPtr<UGameplayInputAsset> GetInputAsset() const;
 };

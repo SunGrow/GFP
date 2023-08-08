@@ -4,7 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GFPCharacter.h"
+#include "InputActionValue.h"
 #include "PlayerCharacter.generated.h"
+
+class AGFPPlayerController;
+class UPlayerAttributeSet;
 
 UCLASS()
 class GFP_API APlayerCharacter : public AGFPCharacter,
@@ -20,12 +24,29 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY()
+	TObjectPtr<AGFPPlayerController> PlayerController;
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void Move(const FInputActionValue& Value);
+	void Look(const FInputActionValue& InputActionValue);
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	
+	UFUNCTION(BlueprintPure, Category = "DFP | Player")
+	AGFPPlayerController* GetPlayerController();
+
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+public:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly);
+	TWeakObjectPtr<UPlayerAttributeSet> PlayerAttributeSet;
+	
+	UPROPERTY(BlueprintReadOnly, Transient)
+	FVector InputVector;
+	
+	UPROPERTY(BlueprintReadOnly, Transient)
+	FVector LastInputVector;
 };

@@ -2,3 +2,12 @@
 
 
 #include "Core/GFPPlayerController.h"
+
+AGFPPlayerController::AGFPPlayerController()
+{
+}
+
+TObjectPtr<UGameplayInputAsset> AGFPPlayerController::GetInputAsset() const
+{
+	return BaseMappingContext;
+}

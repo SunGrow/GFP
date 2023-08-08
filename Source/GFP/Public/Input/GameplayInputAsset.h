@@ -5,13 +5,14 @@
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
 #include "InputAction.h"
+#include "InputMappingContext.h"
 #include "GameplayInputAsset.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class GFP_API UGameplayInputAsset : public UDataAsset
+class GFP_API UGameplayInputAsset : public UInputMappingContext
 {
 	GENERATED_BODY()
 
