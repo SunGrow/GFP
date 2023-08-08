@@ -7,7 +7,8 @@
 #include "PlayerCharacter.generated.h"
 
 UCLASS()
-class GFP_API APlayerCharacter : public AGFPCharacter
+class GFP_API APlayerCharacter : public AGFPCharacter,
+                                 public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -25,4 +26,6 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 };

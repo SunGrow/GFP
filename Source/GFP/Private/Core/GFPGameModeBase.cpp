@@ -6,11 +6,13 @@
 #include "Core/GlobalGameState.h"
 #include "Core/GameHUD.h"
 #include "Core/GFPPlayerController.h"
+#include "Core/GFPPlayerState.h"
 
 AGFPGameModeBase::AGFPGameModeBase()
 {
-	HUDClass = AGameHUD::StaticClass();
 	DefaultPawnClass = APlayerCharacter::StaticClass();
 	GameStateClass = AGlobalGameState::StaticClass();
 	PlayerControllerClass = AGFPPlayerController::StaticClass();
+	PlayerStateClass = AGFPPlayerState::StaticClass();
+	HUDClass = AGameHUD::StaticClass();
 }

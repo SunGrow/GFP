@@ -7,7 +7,7 @@
 #include "GFPAbilitySystemComponent.generated.h"
 
 
-UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
+UCLASS()
 class GFP_API UGFPAbilitySystemComponent : public UAbilitySystemComponent
 {
 	GENERATED_BODY()

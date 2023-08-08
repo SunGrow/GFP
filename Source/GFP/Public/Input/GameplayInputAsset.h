@@ -17,11 +17,20 @@ class GFP_API UGameplayInputAsset : public UDataAsset
 
 public:
 	UPROPERTY(EditDefaultsOnly)
-	UInputAction* Movement = nullptr;
-
-	UPROPERTY(EditDefaultsOnly)
-	UInputAction* Sprint = nullptr;
+	UInputAction* Move = nullptr;
 	
 	UPROPERTY(EditDefaultsOnly)
-	UInputAction* Attack = nullptr;
+	UInputAction* Look = nullptr;
+	
+	UPROPERTY(EditDefaultsOnly)
+	UInputAction* Jump = nullptr;
+	
+	UPROPERTY(EditDefaultsOnly)
+	UInputAction* Interact = nullptr;
+	
+	UPROPERTY(EditDefaultsOnly)
+	UInputAction* MainAction = nullptr;
+	
+	UPROPERTY(EditDefaultsOnly)
+	UInputAction* SecondaryAction = nullptr;
 };

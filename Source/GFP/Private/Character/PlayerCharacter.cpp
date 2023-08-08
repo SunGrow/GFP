@@ -2,6 +2,8 @@
 
 
 #include "Character/PlayerCharacter.h"
+#include "System/GFPAbilitySystemComponent.h"
+#include "Core/GFPPlayerState.h"
 
 
 // Sets default values
@@ -28,5 +30,10 @@ void APlayerCharacter::Tick(float DeltaTime)
 void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
+
+UAbilitySystemComponent* APlayerCharacter::GetAbilitySystemComponent() const
+{
+	return StaticCast<AGFPPlayerState*>(GetPlayerState())->AbilitySystemComponent.Get();
 }
 

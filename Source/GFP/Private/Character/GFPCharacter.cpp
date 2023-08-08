@@ -11,8 +11,6 @@ AGFPCharacter::AGFPCharacter()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	AbilitySystemComponent = CreateDefaultSubobject<UGFPAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
 }
 
 // Called when the game starts or when spawned
@@ -33,9 +31,3 @@ void AGFPCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
-
-UAbilitySystemComponent* AGFPCharacter::GetAbilitySystemComponent() const
-{
-	return AbilitySystemComponent;
-}
-

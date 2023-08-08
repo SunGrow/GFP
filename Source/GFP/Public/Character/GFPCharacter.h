@@ -11,8 +11,7 @@
 class UGFPAbilitySystemComponent;
 
 UCLASS()
-class GFP_API AGFPCharacter : public ACharacter,
-                              public IAbilitySystemInterface
+class GFP_API AGFPCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -30,9 +29,4 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly);
-	TObjectPtr<UGFPAbilitySystemComponent> AbilitySystemComponent;
 };
