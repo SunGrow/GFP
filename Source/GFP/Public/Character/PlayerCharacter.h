@@ -27,6 +27,9 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<AGFPPlayerController> PlayerController;
+	UPROPERTY()
+	TObjectPtr<UPlayerAttributeSet> AttributeSet;
+
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -41,6 +44,7 @@ public:
 	AGFPPlayerController* GetPlayerController();
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	virtual void PossessedBy(AController* NewController) override;
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly);
 	TWeakObjectPtr<UPlayerAttributeSet> PlayerAttributeSet;

@@ -18,6 +18,8 @@ APlayerCharacter::APlayerCharacter()
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	MovementAllowedGameplayTag = FGameplayTag::RequestGameplayTag(FName("Movement.MovementAllowed"));
+	
+	AttributeSet = CreateDefaultSubobject<UPlayerAttributeSet>(TEXT("PlayerAttributeSet"));
 }
 
 // Called when the game starts or when spawned
@@ -25,7 +27,6 @@ void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	AbilitySystemComponent = StaticCast<AGFPPlayerState*>(GetPlayerState())->AbilitySystemComponent;
 	PlayerAttributeSet = StaticCast<AGFPPlayerState*>(GetPlayerState())->PlayerAttributeSet;
 }
 
@@ -48,6 +49,9 @@ void APlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 		
 		EnhancedInputComponent->BindAction(InputsAsset->Look, ETriggerEvent::Triggered, this, &APlayerCharacter::Look);
 		EnhancedInputComponent->BindAction(InputsAsset->Move, ETriggerEvent::Triggered, this, &APlayerCharacter::Move);
+		AbilitySystemComponent->BindToInputComponent(PlayerInputComponent);
+		FGameplayAbilityInputBinds
+		AbilitySystemComponent->BindAbilityActivationToInputComponent(PlayerInputComponent, )
 	}
 }
 
@@ -64,6 +68,17 @@ AGFPPlayerController* APlayerCharacter::GetPlayerController()
 UAbilitySystemComponent* APlayerCharacter::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent.Get();
+}
+
+void APlayerCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+	auto PS = GetPlayerState<AGFPPlayerState>();
+	if (IsValid(PS))
+	{
+		AbilitySystemComponent = PS->AbilitySystemComponent;
+		AbilitySystemComponent->InitAbilityActorInfo(PS, this);
+	}
 }
 
 void APlayerCharacter::Move(const FInputActionValue& Value)
